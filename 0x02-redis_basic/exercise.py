@@ -8,7 +8,7 @@ exercise
 
 import redis
 import uuid
-from typing import Any
+from typing import Union
 
 
 class Cache:
@@ -17,7 +17,7 @@ class Cache:
         self.__redis = redis.Redis()
         self.__redis.flushdb()
 
-    def store(self, data: Any) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """returns random key"""
         randomKey = uuid.uuid4()
         self.__redis.set(str(randomKey), data)
