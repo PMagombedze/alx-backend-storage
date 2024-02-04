@@ -4,8 +4,7 @@
 from pymongo import MongoClient
 
 def top_students(mongo_collection):
-    # Use the aggregate function to calculate the average and sort
-    pipeline = [
+    studs = [
         {"$unwind": "$scores"},
         {"$group": 
             {"_id": "$_id", 
@@ -15,4 +14,4 @@ def top_students(mongo_collection):
         },
         {"$sort": {"averageScore": -1}}
     ]
-    return list(mongo_collection.aggregate(pipeline))
+    return list(mongo_collection.aggregate(studs))
